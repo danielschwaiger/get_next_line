@@ -6,7 +6,7 @@
 /*   By: dapanciu <dapanciu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 16:07:23 by dapanciu          #+#    #+#             */
-/*   Updated: 2022/05/31 10:21:38 by dapanciu         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:45:31 by dapanciu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <stdarg.h>
 # include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4000
+# endif
 
 /*------ft_printf---functions-----------------*/
 
@@ -35,6 +39,7 @@ int	ft_putnbr_u(unsigned int nb);
 /*----------GNL---------------------------------*/
 
 char *get_next_line(int fd);
+char *ft_read()
 
 /*--------------END--GNL------------------------*/
 #endif

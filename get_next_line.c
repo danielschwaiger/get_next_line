@@ -6,7 +6,7 @@
 /*   By: dapanciu <dapanciu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 16:09:20 by dapanciu          #+#    #+#             */
-/*   Updated: 2022/05/31 11:10:26 by dapanciu         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:50:45 by dapanciu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 
 char *get_next_line(int fd)
 {
-    if (!fd)
-        return (NULL);
+        
 }

@@ -6,28 +6,29 @@
 /*   By: dapanciu <dapanciu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:08:31 by dapanciu          #+#    #+#             */
-/*   Updated: 2022/05/31 12:09:13 by dapanciu         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:50:10 by dapanciu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <fcntl.h>
 
-int main (void)
+int main (int argc, char **argv)
 {
-    char        buff[10];
     int         fd;
-    ssize_t     nr_bytes;
+    char        *line;
+
+    (void)argc;
+    line = "";
     
-    ft_printf("This is a test: %s Content: %d\n", "42", 5);
-    fd = open("test1", O_RDONLY);
+    fd = open(argv[1], O_RDONLY);
     if (fd == -1)
         ft_printf("Error - No files to read !!!!");
-    else
-        nr_bytes = read(fd, buff, 15);
-            if (nr_bytes == 0)
-                ft_printf("Looks like your file is empty !!!");
-            else 
-                ft_printf("Number of char found is: %d Content :%s\n", nr_bytes, buff);
+    while (line != NULL)
+    {
+        line = get_next_line(fd);
+        ft_printf("%s", line);
+    }
+    close(fd);
     return (0);
 }
