@@ -6,87 +6,88 @@
 /*   By: dapanciu <dapanciu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 16:07:20 by dapanciu          #+#    #+#             */
-/*   Updated: 2022/05/31 11:26:36 by dapanciu         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:49:43 by dapanciu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <fcntl.h>
 
 /*------ft_printf_functions----------*/
 
 int ft_putchar(char c)
 {
-    int dest;
+	int dest;
 
-    dest = 0;
-    dest += write(1, &c, 1);
-    return (dest);
+	dest = 0;
+	dest += write(1, &c, 1);
+	return (dest);
 }
 
 int ft_putstr(char *s)
 {
-    int val;
+	int val;
 
-    if(!s)
-        return (ft_putstr("(null)"));
-    val = 0;
-    while(*s)
-        val += ft_putchar(*s++);
-    return (val);
+	if(!s)
+		return (ft_putstr("(null)"));
+	val = 0;
+	while(*s)
+		val += ft_putchar(*s++);
+	return (val);
 }
 
 int ft_print_hexa(unsigned long int nb, char c)
 {
-    int res;
+	int res;
 
-    res = 0;
+	res = 0;
 
-    if(c == 'x' || c == 'p')
-    {
-        if (nb >= 16)
-            res += (ft_print_hexa(nb / 16, c));
-        res += ft_putchar("0123456789abcdef"[nb % 16]);
-    }
-    else if (c == 'X')
-    {
-        if(nb >= 16)
-            res += ft_print_hexa(nb / 16, c);
-        res += ft_putchar("0123456789ABCDEF"[nb % 16]);
-    }
-    return (res);
+	if(c == 'x' || c == 'p')
+	{
+		if (nb >= 16)
+			res += (ft_print_hexa(nb / 16, c));
+		res += ft_putchar("0123456789abcdef"[nb % 16]);
+	}
+	else if (c == 'X')
+	{
+		if(nb >= 16)
+			res += ft_print_hexa(nb / 16, c);
+		res += ft_putchar("0123456789ABCDEF"[nb % 16]);
+	}
+	return (res);
 }
 
 int ft_putnbr(int nb)
 {
-    int dest;
+	int dest;
 
-    dest = 0;
-    if (nb == -2147483648)
-        return (ft_putstr("-2147483648"));
-    if (nb < 0)
-    {
-        dest += write(1, "-", 1);
-        nb *= -1;
-    }
-    if (nb >= 10)
-        dest += ft_putnbr(nb / 10);
-    nb = nb % 10;
-    if (nb < 10)
-        dest += ft_putchar(nb + '0');
-    return (dest);
+	dest = 0;
+	if (nb == -2147483648)
+		return (ft_putstr("-2147483648"));
+	if (nb < 0)
+	{
+		dest += write(1, "-", 1);
+		nb *= -1;
+	}
+	if (nb >= 10)
+		dest += ft_putnbr(nb / 10);
+	nb = nb % 10;
+	if (nb < 10)
+		dest += ft_putchar(nb + '0');
+	return (dest);
 }
 
 int ft_putnbr_u(unsigned int nb)
 {
-    int dest;
+	int dest;
 
-    dest = 0;
-    if (nb >= 10)
-        dest += ft_putnbr_u(nb / 10);
-    nb = nb % 10;
-    if (nb < 10)
-        dest += ft_putchar(nb + '0');
-    return (dest);
+	dest = 0;
+	if (nb >= 10)
+		dest += ft_putnbr_u(nb / 10);
+	nb = nb % 10;
+	if (nb < 10)
+		dest += ft_putchar(nb + '0');
+	return (dest);
 }
 
 int	ft_read_types(va_list ap, char x)
@@ -135,6 +136,11 @@ int	ft_printf(char const *frmt, ...)
 
 /*----------GNL---------------------------------*/
 
+/*  ssize_t read(int fildes, void *buf, size_t nbyte);  */
+char *ft_read(int fd, char *str, char *buffer)
+{
+	ssize_t	nr_bytes;
 
+}
 
 /*--------------END--GNL------------------------*/
