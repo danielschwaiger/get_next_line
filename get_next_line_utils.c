@@ -6,7 +6,7 @@
 /*   By: dapanciu <dapanciu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 16:07:20 by dapanciu          #+#    #+#             */
-/*   Updated: 2022/06/01 12:49:43 by dapanciu         ###   ########.fr       */
+/*   Updated: 2022/06/06 14:19:24 by dapanciu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	ft_printf(char const *frmt, ...)
 	va_end(pd);
 	return (i);
 }
-/*-------------END--_FT_PRINF--------*/
+/*-------------END--_FT_PRINTF--------*/
 
 
 /*----------GNL---------------------------------*/
@@ -139,8 +139,83 @@ int	ft_printf(char const *frmt, ...)
 /*  ssize_t read(int fildes, void *buf, size_t nbyte);  */
 char *ft_read(int fd, char *str, char *buffer)
 {
-	ssize_t	nr_bytes;
+	ssize_t	line;
 
+    line = 1;
+    while (line > 0)
+    {
+        line = read(fd, buffer, BUFFER_SIZE);
+        if (line == -1)
+            free(buffer);
+            return (NULL);
+        buffer[line] = '\0';
+        str = ft_strjoin(str, buffer);
+        if (ft_strchr(buffer, '\n'))
+            break ;
+    }
+    return (str);
+}
+/*--------------Other functions---------------*/
+
+
+size_t ft_strlen(const char *s)
+{
+    size_t i;
+
+    i = 0;
+    while(s[i] != '\0')   
+        i++;
+    return (i);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+    unsigned int        i;
+    char                *res;
+    unsigned char       casted_c;
+
+    i = 0;
+    casted_c = (unsigned char)c;
+    while(s[i])
+    {
+        if (s[i] == casted_c)
+        {
+            res = (char *)c;
+            return (&res[i]);
+        }
+    }
+    if (s[i] == casted_c)
+    {
+        res = (char *)c;
+        return (&res[i]);
+    }
+    return (0);
+}
+
+char	*ft_strjoin(char *str1, char *str2)
+{
+    int             i;
+    int             j;
+    char            *ptr;
+    unsigned int    size;
+
+    if (!str1)
+    {
+        str1 = (char *)malloc(1 * sizeof(char));
+        str1[0] = '\0';
+    }    
+    size = ft_strlen(str1) + ft_strlen(str2);
+    ptr = (char *)malloc(sizeof(char) * (size + 1));
+    if (!ptr)
+        return (NULL);
+    i = -1;
+    j = 0;
+    while(str1[++i])
+        ptr[i] = str1[i];
+    while(str2[j])
+        ptr[i++] = str2[j++];
+    ptr[size] = '\0';   
+    free(str1);
+    return (ptr);
+}
 /*--------------END--GNL------------------------*/
