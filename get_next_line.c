@@ -6,7 +6,7 @@
 /*   By: dapanciu <dapanciu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 16:09:20 by dapanciu          #+#    #+#             */
-/*   Updated: 2022/06/07 13:39:19 by dapanciu         ###   ########.fr       */
+/*   Updated: 2022/06/07 14:43:20 by dapanciu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char *get_next_line(int fd)
 	char        *line;
 	char        *buffer;
 
-	if (/* fd == 0 || */ BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0)
 		return (NULL); 
 	if (fd < 0 || fd > 1024)
 		return (NULL);
